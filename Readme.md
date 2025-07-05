@@ -39,6 +39,7 @@ Backend API: [https://bookish-backend-taupe.vercel.app](https://bookish-backend-
 
 ## Folder Structure
 
+<pre>
 bookish/
 ├── backend/
 │   ├── src/
@@ -63,6 +64,7 @@ bookish/
 │   ├── package.json
 │   └── tsconfig.json
 └── README.md
+</pre>
 
 
 ---
