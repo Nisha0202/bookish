@@ -39,6 +39,28 @@ Backend API: [http://localhost:3000](http://localhost:3000)
 
 ## Folder Structure
 
-See [above](#monorepo-structure).
+bookish/
+  backend/
+    src/
+      controllers/
+      models/
+      routes/
+      index.ts
+    .env
+    package.json
+    tsconfig.json
+  frontend/
+    src/
+      app/
+      components/
+      features/
+      pages/
+      main.tsx
+      App.tsx
+      index.css
+    tailwind.config.js
+    package.json
+    tsconfig.json
+  README.md
 
 ---
