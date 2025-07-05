@@ -130,11 +130,11 @@ const page = useSelector((state: RootState) => state.ui.bookPage);
 >
   Previous
 </button>
-          <span className="btn btn-sm btn-disabled">
+          <span className="btn btn-sm btn-disabled border">
             Page {page} of {Math.ceil(data.total / 10)}
           </span>
        <button
-  className="btn btn-sm"
+  className="btn btn-sm border-2 border-gray-400"
   disabled={page === Math.ceil(data.total / 10)}
   onClick={() => dispatch(setBookPage(page + 1))}
 >

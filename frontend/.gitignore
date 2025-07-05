@@ -19,8 +19,7 @@ out/
 
 # lock files (optional)
 package-lock.json
-yarn.lock
-pnpm-lock.yaml
+
 
 # test coverage
 coverage/
