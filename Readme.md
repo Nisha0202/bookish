@@ -34,13 +34,14 @@ npm install
 npm run dev
 ```
 
-Frontend: [http://localhost:5173](http://localhost:5173)  
-Backend API: [http://localhost:3000](http://localhost:3000)
+Frontend: [https://bookish-frontend-snowy.vercel.app/books](https://bookish-frontend-snowy.vercel.app/books)  
+Backend API: [https://bookish-backend-taupe.vercel.app](https://bookish-backend-taupe.vercel.app)
 
 ## Folder Structure
 
 bookish/
   backend/
+    public/
     src/
       controllers/
       models/
