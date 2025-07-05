@@ -64,7 +64,9 @@ const { data, isLoading, error, refetch } = useGetBooksQuery({ page, limit: 10 }
           </thead>
           <tbody>
             {data?.books.map((book: any) => (
-              <tr key={book._id}>
+              <tr key={book._id}
+              className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+               onClick={() => navigate(`/books/${book._id}`)}>
                 <td>{book.title}</td>
                 <td>{book.author}</td>
                 <td className="hidden sm:table-cell">{book.genre}</td>
