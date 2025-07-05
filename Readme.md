@@ -8,7 +8,6 @@ A clean, minimal library management system built with React, Redux Toolkit Query
 - Borrow books with quantity and due date.
 - Borrow summary aggregate.
 - Optimistic UI, toast notifications, responsive, type-safe forms.
-- No authentication; public access.
 
 ## Tech Stack
 
