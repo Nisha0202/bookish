@@ -1,0 +1,33 @@
+# node modules
+node_modules/
+
+# environment variables
+.env
+
+# logs
+logs/
+*.log
+
+# system files
+.DS_Store
+Thumbs.db
+
+# build output
+dist/
+build/
+out/
+
+# lock files (optional)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# test coverage
+coverage/
+
+# IDE folders
+.vscode/
+.idea/
+
+# TypeScript
+*.tsbuildinfo

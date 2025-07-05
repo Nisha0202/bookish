@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",           // ✅ Required for Express imports to work properly
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true, // ✅ Safe & helps with mixed CJS/ESM compatibility
+    "resolveJsonModule": true,            // ✅ Optional, helpful for .env or JSON configs
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "outDir": "dist",                     // ✅ Optional but good for builds
+    "rootDir": "src"                      // ✅ Optional but keeps project clean
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
