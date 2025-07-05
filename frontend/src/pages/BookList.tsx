@@ -121,9 +121,9 @@ const page = useSelector((state: RootState) => state.ui.bookPage);
       </div>
 
             {data?.total && (
-        <div className="flex justify-center mt-6 gap-2">
+        <div className="flex justify-center mt-6 gap-2 text-gray-600 dark:text-gray-200">
          <button
-  className="btn btn-sm text-gray-600"
+  className="btn btn-sm "
   disabled={page === 1}
   onClick={() => dispatch(setBookPage(page - 1))}
 >

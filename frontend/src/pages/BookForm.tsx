@@ -13,7 +13,8 @@ import {
   HiOutlineClipboardList,
   HiOutlineDocumentText,
   HiOutlineCheckCircle,
-  HiOutlineExclamationCircle
+  HiOutlineExclamationCircle,
+  HiOutlineArrowLeft
 } from "react-icons/hi";
 
 interface Props {
@@ -37,7 +38,7 @@ export default function BookForm({ edit }: Props) {
 const form = useSelector((state: RootState) => state.bookForm);
 const dispatch = useDispatch();
 
-// Instead of useState handler:
+
 const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
   const { name, value, type } = e.target;
   dispatch(
@@ -45,7 +46,6 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElemen
   );
 };
 
-// Instead of useEffect for edit:
 useEffect(() => {
   if (edit && bookData) {
     dispatch(setForm(bookData));
@@ -236,12 +236,22 @@ useEffect(() => {
               )}
             </button>
           </form>
-          <div className="mt-6 text-xs text-base-content/70 text-right">
+          <div className="mt-1 text-xs text-base-content/70 text-right">
             <span className="flex items-center gap-1 justify-end">
               <HiOutlineExclamationCircle className="text-warning" />
               <span>Fields marked with <span className="text-error">*</span> are required.</span>
             </span>
           </div>
+
+           <button
+              type="button"
+              className="btn btn-outline mt-4 py-4 w-full flex items-center gap-2"
+              onClick={() => navigate("/books")}
+            >
+              <HiOutlineArrowLeft className="text-md" />
+              Back to Books
+            </button>
+
         </div>
       </div>
     </div>
