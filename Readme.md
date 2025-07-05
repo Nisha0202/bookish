@@ -40,28 +40,29 @@ Backend API: [https://bookish-backend-taupe.vercel.app](https://bookish-backend-
 ## Folder Structure
 
 bookish/
-  backend/
-    public/
-    src/
-      controllers/
-      models/
-      routes/
-      index.ts
-    .env
-    package.json
-    tsconfig.json
-  frontend/
-    src/
-      app/
-      components/
-      features/
-      pages/
-      main.tsx
-      App.tsx
-      index.css
-    tailwind.config.js
-    package.json
-    tsconfig.json
-  README.md
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   └── index.ts
+│   ├── .env
+│   ├── package.json
+│   └── tsconfig.json
+├── frontend/
+|   ├── public/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   ├── features/
+│   │   ├── pages/
+│   │   ├── main.tsx
+│   │   ├── App.tsx
+│   │   └── index.css
+│   ├── tailwind.config.js
+│   ├── package.json
+│   └── tsconfig.json
+└── README.md
+
 
 ---
