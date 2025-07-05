@@ -5,28 +5,35 @@ import {
 } from "../features/apiSlice";
 import { toast } from "react-toastify";
 import { HiOutlineEye, HiOutlinePencilAlt, HiOutlineTrash, HiOutlineBookOpen, HiOutlinePlus } from "react-icons/hi";
-
-  import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../app/store";
 import { setBookPage } from "../features/uiSlice";
 export default function BookList() {
 
 
-const dispatch = useDispatch();
-const page = useSelector((state: RootState) => state.ui.bookPage);
-  // const { data, isLoading, error, refetch } = useGetBooksQuery({ page, limit });
-  const { data, isLoading, error, refetch } = useGetBooksQuery({});
+  const dispatch = useDispatch();
+  const page = useSelector((state: RootState) => state.ui.bookPage);
+const { data, isLoading, error, refetch } = useGetBooksQuery({ page, limit: 10 });
+
   const [deleteBook] = useDeleteBookMutation();
   const navigate = useNavigate();
 
+
+
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+
+
   const handleDelete = async (id: string) => {
-    if (!window.confirm("Delete this book?")) return;
+  
     try {
       await deleteBook(id).unwrap();
       toast.success("Book deleted");
       refetch();
+      setDeleteId(null);
     } catch (e: any) {
       toast.error(e.data?.error || "Delete failed");
+       setDeleteId(null);
     }
   };
 
@@ -93,7 +100,7 @@ const page = useSelector((state: RootState) => state.ui.bookPage);
                       <HiOutlinePencilAlt className="text-lg" />
                     </button>
                     <button
-                      onClick={() => handleDelete(book._id)}
+                      onClick={() => setDeleteId(book._id)}
                       className="btn btn-ghost btn-xs tooltip"
                       data-tip="Delete"
                     >
@@ -120,27 +127,51 @@ const page = useSelector((state: RootState) => state.ui.bookPage);
         </table>
       </div>
 
-            {data?.total && (
+      {data?.total && (
         <div className="flex justify-center mt-6 gap-2 text-gray-600 dark:text-gray-200">
-         <button
-  className="btn btn-sm border-2 border-gray-200 dark:border-gray-600 "
-  disabled={page === 1}
-  onClick={() => dispatch(setBookPage(page - 1))}
->
-  Previous
-</button>
+          <button
+            className="btn btn-sm border-2 border-gray-200 dark:border-gray-600 "
+            disabled={page === 1}
+            onClick={() => dispatch(setBookPage(page - 1))}
+          >
+            Previous
+          </button>
           <span className="btn btn-sm btn-disabled border">
             Page {page} of {Math.ceil(data.total / 10)}
           </span>
-       <button
-  className="btn btn-sm border-2 border-gray-200 dark:border-gray-600"
-  disabled={page === Math.ceil(data.total / 10)}
-  onClick={() => dispatch(setBookPage(page + 1))}
->
-  Next
-</button>
+          <button
+            className="btn btn-sm border-2 border-gray-200 dark:border-gray-600"
+            disabled={page === Math.ceil(data.total / 10)}
+            onClick={() => dispatch(setBookPage(page + 1))}
+          >
+            Next
+          </button>
         </div>
       )}
+
+      {deleteId && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-base-100 rounded-lg p-6 shadow-md w-full max-w-sm">
+            <h2 className="text-lg font-semibold mb-4">Confirm Deletion</h2>
+            <p className="mb-6 text-sm">Are you sure you want to delete this book?</p>
+            <div className="flex justify-end gap-2">
+              <button
+                className="btn btn-sm btn-ghost"
+                onClick={() => setDeleteId(null)}
+              >
+                Cancel
+              </button>
+              <button
+                className="btn btn-sm btn-error"
+                 onClick={() => handleDelete(deleteId)}
+              >
+                Yes, Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
 
     </div>
   );
