@@ -59,29 +59,6 @@ useEffect(() => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-  // useEffect(() => {
-  //   if (edit && bookData) setForm(bookData);
-  // }, [edit, bookData]);
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   const { name, value, type } = e.target;
-  //   setForm({
-  //     ...form,
-  //     [name]: type === "number" ? +value : value
-  //   });
-  // };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -153,7 +130,7 @@ useEffect(() => {
                 onChange={handleChange}
                 placeholder="Book title"
                 className="input input-bordered w-full remove-outline mb-4"
-                required
+                
               />
             </label>
             <label className="form-control w-full">
@@ -185,7 +162,7 @@ useEffect(() => {
                 onChange={handleChange}
                 placeholder="Genre"
                 className="input input-bordered w-full remove-outline mb-4"
-                required
+             
               />
             </label>
             <label className="form-control w-full">
@@ -201,7 +178,7 @@ useEffect(() => {
                 onChange={handleChange}
                 placeholder="ISBN"
                 className="input input-bordered w-full remove-outline"
-                required
+                
                 pattern="^[0-9\-]+$"
               />
              <div className="label w-full block mb-4">
@@ -239,7 +216,7 @@ useEffect(() => {
                 placeholder="Copies"
                 className="input input-bordered w-full remove-outline mb-4"
                 min={0}
-                required
+               
               />
             </label>
             <button

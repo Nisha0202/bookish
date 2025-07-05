@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { Book, Borrow, BorrowSummary } from "../features/types";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://bookish-backend-taupe.vercel.app";
 
 export const api = createApi({
   reducerPath: "api",

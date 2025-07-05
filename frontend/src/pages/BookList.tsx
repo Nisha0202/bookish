@@ -12,7 +12,6 @@ import { setBookPage } from "../features/uiSlice";
 export default function BookList() {
 
 
-// Replace useState
 const dispatch = useDispatch();
 const page = useSelector((state: RootState) => state.ui.bookPage);
   // const { data, isLoading, error, refetch } = useGetBooksQuery({ page, limit });
@@ -124,7 +123,7 @@ const page = useSelector((state: RootState) => state.ui.bookPage);
             {data?.total && (
         <div className="flex justify-center mt-6 gap-2">
          <button
-  className="btn btn-sm"
+  className="btn btn-sm text-gray-600"
   disabled={page === 1}
   onClick={() => dispatch(setBookPage(page - 1))}
 >
@@ -134,7 +133,7 @@ const page = useSelector((state: RootState) => state.ui.bookPage);
             Page {page} of {Math.ceil(data.total / 10)}
           </span>
        <button
-  className="btn btn-sm border-2 border-gray-400"
+  className="btn btn-sm border-2 border-gray-200 dark:border-gray-600"
   disabled={page === Math.ceil(data.total / 10)}
   onClick={() => dispatch(setBookPage(page + 1))}
 >

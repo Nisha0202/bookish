@@ -12,7 +12,7 @@ const initialState: BookFormState = {
   genre: "",
   isbn: "",
   description: "",
-  copies: 1,
+  copies: 0,
   available: true
 };
 

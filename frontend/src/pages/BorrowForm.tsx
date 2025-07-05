@@ -97,6 +97,7 @@ export default function BorrowForm() {
                 </div>
                 <input
                   type="number"
+                  min={0}
                   className="input input-bordered w-full remove-outline"
                   value={quantity}
                   onChange={(e) => dispatch(setQuantity(+e.target.value))}
