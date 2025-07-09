@@ -24,23 +24,58 @@ export default function BorrowForm() {
   const dueDate = useSelector((state: RootState) => state.borrowForm.dueDate);
   const dispatch = useDispatch();
 
+  const selectedDate = new Date(dueDate);
+  const today = new Date();
+  const oneYearFromNow = new Date();
+  oneYearFromNow.setFullYear(today.getFullYear() + 1);
+
+  if (selectedDate < today) return toast.error("Due date cannot be in the past.");
+  if (selectedDate > oneYearFromNow) return toast.error("Due date must be within 1 year.");
+
+
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!dueDate) return toast.error("Due date required");
+  //   if (quantity < 1) return toast.error("Quantity must be at least 1");
+  //   if (book && quantity > book.copies)
+  //     return toast.error("Not enough copies available");
+  //   try {
+  //     await borrowBook({ bookId: bookId!, quantity, dueDate }).unwrap();
+  //     dispatch(resetBorrowForm());
+
+  //     toast.success("Book borrowed!");
+  //     navigate("/borrow-summary");
+  //   } catch (e: any) {
+  //     toast.error(e.data?.error || "Failed to borrow.");
+  //   }
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!dueDate) return toast.error("Due date required");
-    if (quantity < 1) return toast.error("Quantity must be at least 1");
-    if (book && quantity > book.copies)
-      return toast.error("Not enough copies available");
-    try {
-      await borrowBook({ bookId: bookId!, quantity, dueDate }).unwrap();
-      dispatch(resetBorrowForm());
+  e.preventDefault();
+  if (!dueDate) return toast.error("Due date required");
+  const selectedDate = new Date(dueDate);
+  const today = new Date();
+  const oneYearFromNow = new Date();
+  oneYearFromNow.setFullYear(today.getFullYear() + 1);
 
-      toast.success("Book borrowed!");
-      navigate("/borrow-summary");
-    } catch (e: any) {
-      toast.error(e.data?.error || "Failed to borrow.");
-    }
-  };
+  if (selectedDate < today) return toast.error("Due date cannot be in the past.");
+  if (selectedDate > oneYearFromNow) return toast.error("Due date must be within 1 year.");
+
+  if (quantity < 1) return toast.error("Quantity must be at least 1");
+  if (book && quantity > book.copies)
+    return toast.error("Not enough copies available");
+
+  try {
+    await borrowBook({ bookId: bookId!, quantity, dueDate }).unwrap();
+    dispatch(resetBorrowForm());
+    toast.success("Book borrowed!");
+    navigate("/borrow-summary");
+  } catch (e: any) {
+    toast.error(e.data?.error || "Failed to borrow.");
+  }
+};
+
 
   if (isLoading)
     return (
@@ -118,13 +153,17 @@ export default function BorrowForm() {
                     <HiOutlineCalendar className="text-secondary" /> Due Date
                   </span>
                 </div>
+                <input
+                  type="date"
+                  className="input input-bordered w-full remove-outline"
+                  value={dueDate}
+                  min={new Date().toISOString().split("T")[0]}
+                  max={new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+                    .toISOString()
+                    .split("T")[0]}
+                  onChange={(e) => dispatch(setDueDate(e.target.value))}
+                />
 
-            <input
-  type="date"
-  className="input input-bordered w-full remove-outline"
-  value={dueDate}
-  onChange={(e) => dispatch(setDueDate(e.target.value))}
-/>
               </label>
             </div>
             <button

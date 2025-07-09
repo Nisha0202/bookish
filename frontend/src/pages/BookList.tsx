@@ -5,7 +5,7 @@ import {
 } from "../features/apiSlice";
 import { toast } from "react-toastify";
 import { HiOutlineEye, HiOutlinePencilAlt, HiOutlineTrash, HiOutlineBookOpen, HiOutlinePlus } from "react-icons/hi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../app/store";
 import { setBookPage } from "../features/uiSlice";
@@ -14,18 +14,22 @@ export default function BookList() {
 
   const dispatch = useDispatch();
   const page = useSelector((state: RootState) => state.ui.bookPage);
-const { data, isLoading, error, refetch } = useGetBooksQuery({ page, limit: 10 });
+  const { data, isLoading, error, refetch } = useGetBooksQuery({ page, limit: 10 });
 
   const [deleteBook] = useDeleteBookMutation();
   const navigate = useNavigate();
 
+  // Optional: force refetch when this component mounts
+  useEffect(() => {
+    refetch();
+  }, []);
 
 
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
 
   const handleDelete = async (id: string) => {
-  
+
     try {
       await deleteBook(id).unwrap();
       toast.success("Book deleted");
@@ -33,9 +37,12 @@ const { data, isLoading, error, refetch } = useGetBooksQuery({ page, limit: 10 }
       setDeleteId(null);
     } catch (e: any) {
       toast.error(e.data?.error || "Delete failed");
-       setDeleteId(null);
+      setDeleteId(null);
     }
   };
+
+
+
 
   if (isLoading) return <div className="flex justify-center items-center py-10">Loading…</div>;
   if (error) return <div className="text-error text-center py-8">Error loading books.</div>;
@@ -65,15 +72,14 @@ const { data, isLoading, error, refetch } = useGetBooksQuery({ page, limit: 10 }
           <tbody>
             {data?.books.map((book: any) => (
               <tr key={book._id}
-              className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
-               onClick={() => navigate(`/books/${book._id}`)}>
+                className="cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800">
                 <td>{book.title}</td>
                 <td>{book.author}</td>
                 <td className="hidden sm:table-cell">{book.genre}</td>
                 <td className="hidden md:table-cell">{book.isbn}</td>
                 <td className="hidden md:table-cell">{book.copies}</td>
                 <td>
-                  {book.available ? (
+                  {book.available && book.copies ? (
                     <span className="inline-flex items-center gap-1">
                       <span className="badge badge-success badge-xs"></span>
                       <span className="sr-only">Available</span>
@@ -165,7 +171,7 @@ const { data, isLoading, error, refetch } = useGetBooksQuery({ page, limit: 10 }
               </button>
               <button
                 className="btn btn-sm btn-error"
-                 onClick={() => handleDelete(deleteId)}
+                onClick={() => handleDelete(deleteId)}
               >
                 Yes, Delete
               </button>

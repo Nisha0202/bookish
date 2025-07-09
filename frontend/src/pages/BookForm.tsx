@@ -56,9 +56,6 @@ useEffect(() => {
 }, [edit, bookData, dispatch]);
 
 
-
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -86,6 +83,7 @@ useEffect(() => {
         toast.success("Book added successfully!");
       }
       navigate("/books");
+    
     } catch (e: any) {
       const serverMessage = e?.data?.error;
       if (serverMessage?.includes("duplicate")) {

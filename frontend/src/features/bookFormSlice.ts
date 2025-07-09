@@ -13,7 +13,7 @@ const initialState: BookFormState = {
   isbn: "",
   description: "",
   copies: 0,
-  available: true
+  available: false
 };
 
 const bookFormSlice = createSlice({

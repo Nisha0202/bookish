@@ -54,5 +54,13 @@ bookSchema.pre("save", function (next) {
   next();
 });
 
+bookSchema.pre("findOneAndUpdate", function (next) {
+  const update = this.getUpdate() as any;
+  if (update.copies !== undefined) {
+    update.available = update.copies > 0;
+  }
+  next();
+});
+
 // Export model
 export default mongoose.model<IBook>("Book", bookSchema);
